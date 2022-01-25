@@ -83,10 +83,6 @@ class FullyConnectedNet(object):
                 self.params['gamma'+str(i+1)] = np.ones(layer_dims[i+1])
                 self.params['beta'+str(i+1)] = np.zeros(layer_dims[i+1])
 
-
-
-
-        
         pass
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
@@ -160,35 +156,6 @@ class FullyConnectedNet(object):
         # layer, etc.                                                              #
         ############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-        # MY CODE
-        # hidden_num = self.num_layers - 1
-        # scores = X
-        # cache_history = []
-        # L2reg = 0
-        # for i in range(hidden_num):
-        #     if self.normalization == "batchnorm":
-        #         scores,  cache = affine_batch_relu_forward(scores, self.params['W'+str(i+1)],
-        #                                                     self.params['b'+str(i+1)], 
-        #                                                     self.params['beta'+str(i+1)],
-        #                                                     self.params['gamma'+str(i+1)],
-        #                                                     self.bn_params[i])
-        #         # cache_history.append(cache1)
-        #     else:
-        #         scores, cache = affine_relu_forward(scores, self.params['W'+str(i+1)],
-        #                                                     self.params['b'+str(i+1)])
-        #     cache_history.append(cache)
-
-        #     L2reg += np.sum(self.params['W%d' % (i + 1)] ** 2)
-        
-        # i+= 1 
-        # scores, cache = affine_forward(scores, self.params['W'+str(i+1)],
-        #                                         self.params['b'+str(i+1)])
-        # cache_history.append(cache)
-        # # L2reg +=  0.5 * self.reg * np.sum(self.params['W'+str(i+1)])**2
-        # L2reg += np.sum(self.params['W%d' % (i + 1)] ** 2)
-        # L2reg *= 0.5 * self.reg
-
-
 
         hidden_num = self.num_layers - 1
         scores = X
@@ -246,19 +213,7 @@ class FullyConnectedNet(object):
         # of 0.5 to simplify the expression for the gradient.                      #
         ############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-        # loss, dout = softmax_loss(scores, y)
-        # loss += L2reg
-        # dout, grads['W'+str(i+1)], grads['b'+str(i+1)] = affine_backward(dout, cache_history.pop())
-        # grads['W'+str(i+1)] += self.reg * self.params['W'+str(i+1)]
-        # i -= 1 
-        # while i >= 0 :
-        #     if self.normalization == "batchnorm":
-        #         dout, grads['W'+str(i+1)], grads['b'+str(i+1)], grads['beta'+str(i+1)], grads['gamma'+str(i+1)] = affine_batch_relu_backward(dout, cache_history.pop())
-        #     else:
-        #         dout, grads['W'+str(i+1)], grads['b'+str(i+1)] = affine_relu_backward(dout,cache_history.pop())     
-        #     grads['W'+str(i+1)] += self.reg * self.params['W'+str(i+1)]
-
-            # i-= 1 
+       
 
         loss, dout = softmax_loss(scores, y)
         loss += L2reg
