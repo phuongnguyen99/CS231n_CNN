@@ -1,4 +1,3 @@
-
 from builtins import range
 import numpy as np
 
@@ -28,7 +27,6 @@ def affine_forward(x, w, b):
     # will need to reshape the input into rows.                               #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-    #out = x.reshape(x.shape[0], -1).dot(w)+b
 
     out = x.reshape(x.shape[0], -1).dot(w) + b
 
@@ -64,6 +62,7 @@ def affine_backward(dout, cache):
     # TODO: Implement the affine backward pass.                               #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+    
     dx = dout.dot(w.T).reshape(x.shape)
     dw = x.reshape(x.shape[0],-1).T.dot(dout)
     db = np.sum(dout, axis = 0)
@@ -159,16 +158,6 @@ def svm_loss(x, y):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    # N = x.shape[0]
-    # correct_class_score = x[np.arange(N),y]
-    # margin = np.maximum(0, x - correct_class_score[:, np.newaxis]+1)
-    # margin[np.arange(N), y] = 0 
-    # loss = margin.sum()/N
-    # dx = np.zeros_like(x)
-    # dx[margin > 0] = 1
-    # valid_margin_count = np.sum(margin>0, axis = 1)
-    # dx[np.arange(N), y] -= valid_margin_count
-    # dx /= N
     
     N = x.shape[0]
     correct_class_scores = x[np.arange(N), y]
@@ -224,40 +213,12 @@ def softmax_loss(x, y):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    # N = x.shape[0]
-    # correct_class_score = x[np.arange(N),y]
-    # f = x - np.max(correct_class_score[:,np.newaxis], axis = 1 ,keepdims= True)
-    # sum_exp_score = np.exp(f).sum(axis = 1, keepdims = True)
-    # softmax_mat = np.exp(f)/sum_exp_score
-    # loss = np.sum(-np.log(softmax_mat[np.arange(N),y]))
-    # loss /= N
-
-    # dx = softmax_mat.copy()
-    # dx[np.arange(N), y] -= 1 
-    # dx /= N
-
-    # shifted_logits = x - np.max(x, axis=1, keepdims=True)
-    # Z = np.sum(np.exp(shifted_logits), axis=1, keepdims=True)
-    # log_probs = shifted_logits - np.log(Z)
-    # probs = np.exp(log_probs)
-    # N = x.shape[0]
-    # loss = -np.sum(log_probs[np.arange(N), y]) / N
-    # dx = probs.copy()
-    # dx[np.arange(N), y] -= 1
-    # dx /= N
-
     N = len(y) # number of samples
-
     P = np.exp(x - x.max())              # numerically stable exponents
     P /= P.sum(axis=1, keepdims=True)    # row-wise probabilities (softmax)
-
     loss = -np.log(P[range(N), y]).sum() / N # sum cross entropies as loss
-
     P[range(N), y] -= 1
     dx = P / N
-
-
-
 
 
     pass
