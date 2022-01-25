@@ -172,16 +172,6 @@ def svm_loss(x, y):
 
 
 
-   
-
-
-
-
-
-
-
-
-
     pass
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
